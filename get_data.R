@@ -14,3 +14,7 @@ counts_area_sl$LatCat2 <- ifelse(counts_area_sl$Latitude < 25, "20-25",
                           ifelse(counts_area_sl$Latitude < 55, "50-55",
                           ifelse(counts_area_sl$Latitude < 60, "55-60",
                           ifelse(counts_area_sl$Latitude < 65, "60-65","65-70"))))))))) 
+
+
+#write to derived data folder
+write_csv(counts_area_sl, "derived_data/counts_area_sl.csv")
