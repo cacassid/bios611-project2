@@ -9,7 +9,7 @@ You will need Docker and you will need to be able to run Docker as your current 
 
 To run RSS this say:
 
-> docker run -v `pwd`:/home/rstudio -e PASSWORD=$SECRET_PWD -p 8787:8787 -p 8788:8788 -t l17
+> docker run -p $2:$2: -v `pwd`:/home/rstudio -e PASSWORD = $SECRET_PWD -it l17 sudo -H -u rstudio /bin/bash -c "cd ~/; PORT = $2 make $1"
 
 To run the shiny app, go to the terminal in RStudio and run
 
