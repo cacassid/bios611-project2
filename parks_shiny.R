@@ -58,12 +58,16 @@ ui <- navbarPage("Biodiversity in National Parks App",
                                   radioButtons("display_var2",
                                                "Choose a variable to display:",
                                                choices = c("Endangered" = "Endangered",
-                                                           "Species of Concern" = "Species of Concern"),
+                                                           "Threatened" = "Threatened",
+                                                           "Species of Concern" = "Species of Concern",
+                                                           "No Concern" = "No Concern"),
                                                selected = "Endangered"
-                                  )
+                                  ),
+                                  includeMarkdown("conservation_text.md")
                               ),
                               mainPanel(
                                   leafletOutput(outputId = "mymap")
+                                  
                               )
                           )
                  )
@@ -104,6 +108,32 @@ server <- function(input, output) {
                                                        "# of Species of Concern: ", 
                                                        `Species of Concern`)), 
                            color = "#32920F", 
+                           fillOpacity = 0.5)
+        }
+        else if(input$display_var2 == "Threatened") {
+            leaflet(data) %>% 
+                setView(lng = -99, lat = 45, zoom = 3)  %>% #setting the view over ~ center of North America
+                addTiles() %>% 
+                addCircles(data = conservation_park_info, lat = ~ Latitude, lng = ~ Longitude, 
+                           weight = 1, 
+                           radius = ~Threatened*10000, 
+                           popup = ~as.character(paste(Park.Name, "<br>",
+                                                       "# of Threatened Species: ", 
+                                                       `Species of Concern`)), 
+                           color = "#0F4F92", 
+                           fillOpacity = 0.5)
+        }
+        else if(input$display_var2 == "No Concern") {
+            leaflet(data) %>% 
+                setView(lng = -99, lat = 45, zoom = 3)  %>% #setting the view over ~ center of North America
+                addTiles() %>% 
+                addCircles(data = conservation_park_info, lat = ~ Latitude, lng = ~ Longitude, 
+                           weight = 1, 
+                           radius = ~`No Concern`*50, 
+                           popup = ~as.character(paste(Park.Name, "<br>",
+                                                       "# of Species of No Concern: ", 
+                                                       `No Concern`)), 
+                           color = "#572BB7", 
                            fillOpacity = 0.5)
         }
     })
