@@ -29,7 +29,7 @@ counts_area_sl <- read_csv("derived_data/counts_area_sl.csv")
 conservation_park_info <- read_csv("derived_data/conservation_park_info.csv")
 
 # Define UI for application
-ui <- navbarPage("App",
+ui <- navbarPage("Biodiversity in National Parks App",
                  tabPanel("Species by Latitude",
                           sidebarLayout(
                               sidebarPanel(
@@ -52,11 +52,14 @@ ui <- navbarPage("App",
                               )
                           )
                  ),
-                 tabPanel("Map",
+                 tabPanel("Conservation Map",
                           sidebarLayout(
                               sidebarPanel(
-                                  radioButtons("plotType", "Plot type",
-                                               c("Scatter"="p", "Line"="l")
+                                  radioButtons("display_var2",
+                                               "Choose a variable to display:",
+                                               choices = c("Endangered" = "Endangered",
+                                                           "Species of Concern" = "Species of Concern"),
+                                               selected = "Endangered"
                                   )
                               ),
                               mainPanel(
@@ -78,16 +81,31 @@ server <- function(input, output) {
     
     #create the map
     output$mymap <- renderLeaflet({
+        if(input$display_var2 == "Endangered") {
         leaflet(data) %>% 
             setView(lng = -99, lat = 45, zoom = 3)  %>% #setting the view over ~ center of North America
             addTiles() %>% 
             addCircles(data = conservation_park_info, lat = ~ Latitude, lng = ~ Longitude, 
                        weight = 1, 
-                       #radius = ~sqrt(mag)*25000, 
-                       #popup = ~as.character(mag), 
-                       #label = ~as.character(paste0("Magnitude: ", sep = " ", mag)), 
-                       #color = ~pal(mag), 
+                       radius = ~Endangered*10000, 
+                       popup = ~as.character(paste(Park.Name, "<br>",
+                                                   "# of Endangered Species: ", Endangered)), 
+                       color = "#EB8811", 
                        fillOpacity = 0.5)
+        }
+        else if(input$display_var2 == "Species of Concern") {
+            leaflet(data) %>% 
+                setView(lng = -99, lat = 45, zoom = 3)  %>% #setting the view over ~ center of North America
+                addTiles() %>% 
+                addCircles(data = conservation_park_info, lat = ~ Latitude, lng = ~ Longitude, 
+                           weight = 1, 
+                           radius = ~`Species of Concern`*1000, 
+                           popup = ~as.character(paste(Park.Name, "<br>",
+                                                       "# of Species of Concern: ", 
+                                                       `Species of Concern`)), 
+                           color = "#32920F", 
+                           fillOpacity = 0.5)
+        }
     })
     
     output$distPlot <- renderPlot({
