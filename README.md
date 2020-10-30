@@ -1,13 +1,21 @@
 BIOS 611 Project 2
 =================
 
+About the App
+----------------
+This app uses data provided by the National Park Service.
+The datasets used are publicly available on Kaggle. They can be downloaded at: https://www.kaggle.com/nationalparkservice/park-biod
+
+The first tab allows the user to look at histograms that show the distributions of different species by latitude.
+
+The second tab allows the user to look at maps that show the number of species for different conservation statuses at each park. 
 
 Using This Project
 -----------------
 
 You will need Docker and you will need to be able to run Docker as your current user.
 
-To run the R studio server go to your terminal and run
+To run RStudio, go to your terminal and run
 
 > docker run -p 8787:8787 -p 8788:8788 -v `pwd`:/home/rstudio -e PASSWORD=somepass -it project1-env 
 
