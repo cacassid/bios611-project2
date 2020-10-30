@@ -7,13 +7,13 @@ Using This Project
 
 You will need Docker and you will need to be able to run Docker as your current user.
 
-To run RSS this say:
+To run the R studio server go to your terminal and run
 
-> docker run -p $2:$2: -v `pwd`:/home/rstudio -e PASSWORD = $SECRET_PWD -it l17 sudo -H -u rstudio /bin/bash -c "cd ~/; PORT = $2 make $1"
+> docker run -p 8787:8787 -p 8788:8788 -v `pwd`:/home/rstudio -e PASSWORD=somepass -it project1-env 
 
-To run the shiny app, go to the terminal in RStudio and run
+Then, to run the shiny app, go to the terminal in RStudio and run
 
-> PORT=8788 make power_explorer 
+> PORT=8788 make parks_shiny 
 
 If you want to run the shiny app on another port, replace 8788 above (in all places) with the appropriate port.
 
