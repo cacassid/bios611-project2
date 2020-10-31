@@ -1,18 +1,5 @@
-#
-# This is a Shiny web application. You can run the application by clicking
-# the 'Run App' button above.
-#
-# Find out more about building applications with Shiny here:
-#
-#    http://shiny.rstudio.com/
-#
+# Biodiversity in national parks app
 
-
-#idea for new figure:
-#leaflet map where size of bubbles correspond to how many endangered, extinct, etc
-
-#install.packages("leaflet")
-#install.packages("leaflet.extras")
 library(shiny)
 library(ggplot2)
 library(tidyverse)
@@ -25,7 +12,6 @@ port <- as.numeric(args[[1]])
 
 #read in data
 counts_area_sl <- read_csv("derived_data/counts_area_sl.csv")
-
 conservation_park_info <- read_csv("derived_data/conservation_park_info.csv")
 
 # Define UI for application
@@ -73,16 +59,8 @@ ui <- navbarPage("Biodiversity in National Parks App",
                  )
 )
 
-
-
 # Define server logic 
 server <- function(input, output) {
-    
-    #define the color pallate for the magnitude of the earthquake
-    #pal <- colorNumeric(
-     #   palette = c('gold', 'orange', 'dark orange'),
-      #  domain = data$mag)
-    
     #create the map
     output$mymap <- renderLeaflet({
         if(input$display_var2 == "Endangered") {
