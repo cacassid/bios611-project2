@@ -25,11 +25,15 @@ To run RStudio, go to your terminal and run
 
 (Make sure pwd is enclosed in backticks)
 
+Launch RStudio in your browser using port 8787 with username: rstudio and password: somepass. 
+
 Then, to run the shiny app, go to the terminal in RStudio and run
 
 > PORT=8788 make parks_shiny 
 
 If you want to run the shiny app on another port, replace 8788 above (in all places) with the appropriate port.
+
+Lastly, open a new tab and access the shiny app using port 8788.
 
 Makefile
 -----------
