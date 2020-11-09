@@ -148,12 +148,12 @@ server <- function(input, output) {
                 xlab("Latitude") + ylab("Number of Fungi Species")
         } 
         else if (input$display_var == "Vascular Plants") {
-            ggplot(counts_area_sl, aes(x=LatCat2, y = Vascular.Plant)) + 
+            ggplot(counts_area_sl, aes(x=LatCat2, y = `Vascular Plant`)) + 
                 geom_bar(stat = "identity", fill = "#03783D") +
                 xlab("Latitude") + ylab("Number of Vascular Plant Species")
         } 
         else if (input$display_var == "Nonvascular Plants") {
-            ggplot(counts_area_sl, aes(x=LatCat2, y = Nonvascular.Plant)) + 
+            ggplot(counts_area_sl, aes(x=LatCat2, y = `Nonvascular Plant`)) + 
                 geom_bar(stat = "identity", fill = "#6A934A") +
                 xlab("Latitude") + ylab("Number of Nonvascular Plant Species")
         } 
