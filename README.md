@@ -21,7 +21,7 @@ You'll need to first build the container:
 
 To run RStudio, go to your terminal and run
 
-> docker run -p 8787:8787 -p 8788:8788 -v `pwd`:/home/rstudio -e PASSWORD=somepass -it project2-env 
+ docker run -p 8787:8787 -p 8788:8788 -v `pwd`:/home/rstudio -e PASSWORD=somepass -it project2-env 
 
 Then, to run the shiny app, go to the terminal in RStudio and run
 
